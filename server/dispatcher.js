@@ -1,5 +1,6 @@
+console.log('-->', dirs.root + '/config');
 var 
-    config = require(__dirname + '/config'),
+    config = require(dirs.root + '/config'),
     express = require('express'),
      _ = require('lodash'),
     app = express(),
@@ -115,6 +116,6 @@ app.use(function(req, res){
   res.status(404).send('Запрашиваемой страницы не существует :(');
 });
 
-server.listen(process.env.PORT || 8090);
+server.listen(process.env.PORT || 5000);
 
 module.exports = server;
