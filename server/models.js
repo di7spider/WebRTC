@@ -4,7 +4,7 @@ var
 	sequelize = new Sequelize(config.db.name, config.db.login, config.db.pass, {
 	  host: config.db.host,
 	  dialect: config.db.dialect,
-	  port : config.db.port,
+	 // port : config.db.port,
 	  pool: {
 	    max: 5,
 	    min: 0,
