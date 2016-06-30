@@ -7,7 +7,7 @@ var
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
-    store = require('express-mysql-session')(session),
+    //store = require('express-mysql-session')(session),
     multer = require('multer'),
     mime = require('mime'),
     auth = require('basic-auth'),
@@ -43,14 +43,14 @@ app.use(
   session({ 
   	resave: true,
     saveUninitialized: true,
-    secret: 'secret-webrtc',
+    secret: 'secret-webrtc'/*,
     store: new store({
       host: config.db.host,
       port: config.db.port,
       user: config.db.login,
       password: config.db.pass,
       database: config.db.name
-    }),
+    })*/,
     cookie: {
       expires: new Date(Date.now() + (60 * 60 * 24 * 7 * 1000)),
     }

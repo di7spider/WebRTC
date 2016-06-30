@@ -3,7 +3,7 @@ var
 	Sequelize = require("sequelize"),
 	sequelize = new Sequelize(config.db.name, config.db.login, config.db.pass, {
 	  host: config.db.host,
-	  dialect: 'mysql',
+	  dialect: config.db.dialect,
 	  port : config.db.port,
 	  pool: {
 	    max: 5,

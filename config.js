@@ -4,6 +4,7 @@ module.exports = {
 		pass : "admin"
 	},
 	db : {
+		dialect : "postgres",
 		name : "da29pkjfh32su1", 
 		login : "spruviavykdlry", 
 		pass : "dxKoIlURufYLtLxZYkpHT-poDA",
