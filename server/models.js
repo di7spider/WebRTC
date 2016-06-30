@@ -68,14 +68,14 @@ var
 		)
 	};
 
-models.user.sync({force: true}).then(function(){
+// models.user.sync({force: true}).then(function(){
 
-  models.user.create();
-});
+//   models.user.create();
+// });
 
-models.sid.sync({force: true}).then(function(){
+// models.sid.sync({force: true}).then(function(){
 
-  models.sid.create();
-});
+//   models.sid.create();
+// });
 
 module.exports = models;

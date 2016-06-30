@@ -3,6 +3,7 @@ module.exports = {
 		login : "admin",
 		pass : "admin"
 	},
+	https : true,
 	db : {
 		dialect : "postgres",
 		name : "da29pkjfh32su1", 

@@ -1,136 +1,271 @@
-var 
-    config = require(dirs.root + '/config'),
-    express = require('express'),
-     _ = require('lodash'),
-    app = express(),
-    server = require('http').Server(app),
-    bodyParser = require('body-parser'),
-    cookieParser = require('cookie-parser'),
-    session = require('express-session'),
-    store = require('express-sql-session')(session),
-    multer = require('multer'),
-    mime = require('mime'),
-    auth = require('basic-auth'),
-    upload = multer({
-      storage : multer.diskStorage({
-        destination: function(req, file, cb){
-          cb(null, dirs.uploads + '/temp');
+module.exports = function(server){
+
+    var 
+        io = require('socket.io')(server),
+        _ = require('lodash'),
+        cookie = require('cookie'),
+        api = require(__dirname + '/api'),
+        utils = require(__dirname + '/utils'),
+        storage = {
+            pages : {},
+            conn : {},
+            messages : {},
+            users : {}
         },
-        filename: function(req, file, cb){
-          cb(null, file.fieldname + '_' + Date.now() + '.' + mime.extension(file.mimetype) );
-        }
-      })
-    }),
-    options = {
-      root : dirs.client
-    };
+        connRefresh = function(st, data){
 
-app.use(
-  bodyParser.json()
-); 
+            var client = io.sockets.connected[st.id] || {};
 
-app.use(
-  bodyParser.urlencoded({
-    extended: true 
-  })
-); 
+            client.data = _.extend(
+                {},
+                client.data || {}, 
+                data || {}, {
+                    id : st.id,
+                    hsid : st.hsid 
+                }
+            );
 
-app.use(
-  cookieParser()
-);
+            return client.data;
+        }, 
+        getUserInfo = function(st, cb){
 
-app.use(
-  session({ 
-  	resave: true,
-    saveUninitialized: true,
-    secret: 'secret-webrtc',
-    store: new store({
-      client: config.db.dialect,
-      connection: {
-        host: config.db.host,
-        port: config.db.port,
-        user: config.db.login,
-        password: config.db.pass,
-        database: config.db.name
-      },
-      table: 'sessions'
-    }),
-    cookie: {
-      expires: new Date(Date.now() + (60 * 60 * 24 * 7 * 1000)),
-    }
-  })
-);
+            if(st.room && cb){
+            
+                api.userInfo(
+                    st.cookies, 
+                    function(data){
 
-app.get('*', function(req, res, next){
-    
-    if(req.headers["x-forwarded-proto"] === "https"){
+                        var 
+                            val = data.dataValues,
+                            users = storage.users[st.room] = storage.users[st.room] || {},
+                            user = users[st.hsid] = users[st.hsid] || {};
+
+                        if( _.isEmpty(val) && _.isEmpty(user) ){
+
+                            val = {
+                                name : 'Участник ' + (_.keys(users).indexOf(st.hsid) + 1)
+                            };
+
+                            users.name = val.name;
+                        }
+
+                        users[st.hsid] = _.extend(user, val || {});
+
+                        cb(users[st.hsid]);
+                    }
+                );
+            }
+        };
+
+    io.on('connection', function(st){
+
+        var  
+            cookies = cookie.parse(
+                st.request.headers.cookie
+            ) || {},
+            hsid = utils.genHash(
+               cookies['connect.sid'] 
+            );
+
+        st.hsid = hsid;
+
+        storage.conn[hsid] = st.id;
+
+        storage.pages[hsid] || (storage.pages[hsid] = {});
+        storage.pages[hsid][st.handshake.headers.referer] = 1;
        
-       return next();
+        /** Обработчик запросов к API */
+        st.on('api', function(prms, cb){
+
+            _.has(api, prms.method)
+                ? api[prms.method](
+                    _.extend({}, cookies, prms.send || {}, {
+                        st : st, 
+                        io : io, 
+                        storage : storage
+                    }), 
+                    cb
+                )
+                : cb({
+                    errors : 'Запрашиваемый метод не найден'
+                })
+        });
+
+        /** Обработчик запросов к комнате */
+        st.on('room', function(prms, cb){
+
+            prms = prms || {};
+
+            var 
+                type = prms.type,
+                data = prms.data,
+                room = prms.room,
+                result = {};
+
+            if(room){
+
+                if(st.room && st.room != room){
+
+                    st.leave(st.room);
+                }
+        
+                st.join(room);
+
+                st.room = room;
+                st.cookies = cookies;
+
+                if(type == 'init'){
+
+                    return getUserInfo(st, function(user){
+
+                        var conn = connRefresh(st, {}); 
+
+                        /** Передаем объект сообщений чата в комнате */
+                        result.messages = storage.messages[room] || [];
+
+                        /** Передаем объект с информацией об пользователях  */
+                        result.users = storage.users[room] || {};
+                        
+                        /** Передаем объект connected в комнате */
+                        result.connected = {};
+
+                        result.conn = conn;
+
+                        _.each(io.sockets.adapter.rooms[room].sockets, function(v, id){
+                     
+                            result.connected[id] = io.sockets.connected[id].data || {};
+                        });
+
+                        /** Отправить всем клиентам в комнате, кроме отправителя */
+                        st.broadcast.to(room).emit(
+                            'room', {
+                              id : st.id,
+                              hsid : st.hsid,
+                              type : 'user.connected',
+                              data : {
+                                conn : conn,
+                                user : user
+                              }
+                            }
+                        );
+
+                        cb(result);
+                    });
+
+                }else if(type == 'state'){ /** Передача состояния пользователя (подкючен/отключен/стримит) */
+
+                    /** Отправить всем клиентам в комнате, кроме отправителя */
+                    st.broadcast.to(room).emit(
+                        'room', {
+                          id : st.id,
+                          hsid : st.hsid,
+                          type : type,
+                          data : connRefresh(st, data) 
+                        }
+                    );
+
+                }else if(type == 'message'){ /** Отправка сообщения */
+
+                    var messages = storage.messages[room] = storage.messages[room] || [];
+
+                    data.id = st.id;
+                    data.hsid = st.hsid;
+
+                    /** Сохраняем сообщение */
+                    messages.push(data);
+
+                    /** Отправить всем клиентам в комнате */
+                    io.sockets.in(room).emit(
+                        'room', {
+                          id : st.id,
+                          hsid : st.hsid,
+                          type : type,
+                          data : data 
+                        }
+                    );
+
+                }else if(
+                    prms.id && (
+                      type == 'sdp' || 
+                      type == 'candidate' || 
+                      type == 'reconect.peer'
+                    ) 
+                ){
+                    /** Отправить пользователю */
+                    io.sockets.connected[prms.id].emit(
+                        'room', {
+                          id : st.id,
+                          hsid : st.hsid,
+                          type : type,
+                          data : data 
+                        }
+                    ); 
+                } 
+            }
+
+            cb(result);
+        
+        }).on('disconnect', function(){ /** Отключение */
+
+            delete storage.conn[st.hsid];
+            delete storage.pages[hsid][st.handshake.headers.referer];
+
+            setTimeout(function(){
+
+                var 
+                    send = {},
+                    isRefresh = _.has(storage.pages[hsid], st.handshake.headers.referer);
+
+                if(_.size(storage.pages[hsid]) <= 0){ /** Если пользователь ушёл с сайта */
+                    
+                    send = {offline : true};
+                
+                }else if(!isRefresh){ /** Закрыл страницу */
+
+                    send = {offline : false};
+
+                    if(st.room){    
+                    
+                        /** Удаляем накопившиеся сообщения комнаты, если все пользователи вышли из нее */            
+                        if( !_.size(io.sockets.adapter.rooms[st.room]) ){
+
+                            storage.messages[st.room] = []; 
+                            storage.users[st.room] = {}; 
+                        }
+                    }
+                }
+
+                if( !_.isEmpty(send) ){
+
+                    api.userChangeStatus(
+                        _.extend({}, cookies, {
+                            st : st, 
+                            io : io, 
+                            storage : storage
+                        }, send), 
+                        function(){}
+                    );
+                }                  
+
+            }, 5000);
+
+            if(st.room){    
+
+                /** Отправить всем клиентам в комнате, кроме отправителя */
+                st.broadcast.to(st.room).emit(
+                    'room', {
+                      id : st.id,
+                      hsid : st.hsid,
+                      type : 'state',
+                      data : {
+                        id : st.id,
+                        isStream : false,
+                        isDisconnect : true
+                      }
+                    }
+                );
+            }
+        });
     
-    }else{
-      
-      res.redirect("https://" + req.headers.host + req.url);
-    }
-});
-
-app.use(
-  '/client',
-  express.static(dirs.client)
-);
-
-app.use(
-  '/uploads',
-  express.static(dirs.uploads)
-);
-
-app.get('/', function(req, res){
-
-  res.sendFile('index.html', options);
-});
-
-app.get('/personal/', function(req, res){
-
-  res.sendFile('personal.html', options);
-});
-
-app.get('/admin/', function(req, res){
-  
-  	if(config.basic){
-  	
-  	 	var user = auth(req);
-
-	    if( user === undefined || 
-	        !(user['name'] == config.basic.login && user['pass'] == config.basic.pass) ){
-	          
-	        res.statusCode = 401;
-	        res.setHeader('WWW-Authenticate', 'Basic realm="webrc"');
-	        res.end('Доступ запрещен');
-	      
-	    }else{
-	        
-          res.cookie('auth_basic_admin', config.basic.login + '||' + config.basic.pass); 
-	       	res.sendFile('admin.html', options);
-	    }
-	}
-});
-
-app.get('/room/:room', function(req, res){
-
-  res.sendFile('room.html', options);
-});
-
-app.post('/picture', upload.single('picture'), function(req, res, next){
-
-  res.send({
-    file : req.file.filename
-  });
-});
-
-app.use(function(req, res){
-  
-  res.status(404).send('Запрашиваемой страницы не существует :(');
-});
-
-server.listen(process.env.PORT || 5000);
-
-module.exports = server;
+    });
+}
