@@ -4,10 +4,10 @@ module.exports = {
 		pass : "admin"
 	},
 	db : {
-		name : "webrtc", 
-		login : "di7spider", 
-		pass : "1111111",
-		host : "localhost",
-		port : 3306
+		name : "da29pkjfh32su1", 
+		login : "spruviavykdlry", 
+		pass : "dxKoIlURufYLtLxZYkpHT-poDA",
+		host : "ec2-54-243-249-154.compute-1.amazonaws.com",
+		port : 5432
 	}
 };
