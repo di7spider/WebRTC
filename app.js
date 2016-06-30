@@ -5,7 +5,7 @@ global.dirs = {
 	client : __dirname + '/client',
 	uploads : __dirname + '/uploads'
 };
-console.log(global.dirs);
+
 require(dirs.server + '/socket')(
 	require(dirs.server + '/dispatcher')
 );
