@@ -1,4 +1,3 @@
-console.log('-->', dirs.root + '/config');
 var 
     config = require(dirs.root + '/config'),
     express = require('express'),
