@@ -6,8 +6,8 @@ var
     server = require('http').Server(app),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
-    //session = require('express-session'),
-    //store = require('express-mysql-session')(session),
+    session = require('express-session'),
+    store = require('express-sql-session')(session),
     multer = require('multer'),
     mime = require('mime'),
     auth = require('basic-auth'),
@@ -39,23 +39,28 @@ app.use(
   cookieParser()
 );
 
-// app.use(
-//   session({ 
-//   	resave: true,
-//     saveUninitialized: true,
-//     secret: 'secret-webrtc',
-//     store: new store({
-//       host: config.db.host,
-//       port: config.db.port,
-//       user: config.db.login,
-//       password: config.db.pass,
-//       database: config.db.name
-//     }),
-//     cookie: {
-//       expires: new Date(Date.now() + (60 * 60 * 24 * 7 * 1000)),
-//     }
-//   })
-// );
+app.use(
+  session({ 
+  	resave: true,
+    saveUninitialized: true,
+    secret: 'secret-webrtc',
+    store: new store({
+      client: config.db.dialect,
+      connection: {
+        host: config.db.host,
+        port: config.db.port,
+        user: config.db.login,
+        password: config.db.pass,
+        database: config.db.name
+      },
+      table: 'sessions',
+      expires : new Date(Date.now() + (60 * 60 * 24 * 7 * 1000))
+    }),
+    cookie: {
+      expires: new Date(Date.now() + (60 * 60 * 24 * 7 * 1000)),
+    }
+  })
+);
 
 app.use(
   '/client',
