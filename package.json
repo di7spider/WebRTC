@@ -1,6 +1,6 @@
 {
   "name": "WebRTC",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "WebRTC",
   "engines": {
     "node": "5.9.1"
