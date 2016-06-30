@@ -1,12 +1,12 @@
 var 
     config = require(dirs.root + '/config'),
-    _ = require('lodash'),
     express = require('express'),
+     _ = require('lodash'),
     app = express(),
     server = require('http').Server(app),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
-    session = require('express-session'),
+    //session = require('express-session'),
     //store = require('express-mysql-session')(session),
     multer = require('multer'),
     mime = require('mime'),
@@ -39,23 +39,23 @@ app.use(
   cookieParser()
 );
 
-app.use(
-  session({ 
-  	resave: true,
-    saveUninitialized: true,
-    secret: 'secret-webrtc'/*,
-    store: new store({
-      host: config.db.host,
-      port: config.db.port,
-      user: config.db.login,
-      password: config.db.pass,
-      database: config.db.name
-    })*/,
-    cookie: {
-      expires: new Date(Date.now() + (60 * 60 * 24 * 7 * 1000)),
-    }
-  })
-);
+// app.use(
+//   session({ 
+//   	resave: true,
+//     saveUninitialized: true,
+//     secret: 'secret-webrtc',
+//     store: new store({
+//       host: config.db.host,
+//       port: config.db.port,
+//       user: config.db.login,
+//       password: config.db.pass,
+//       database: config.db.name
+//     }),
+//     cookie: {
+//       expires: new Date(Date.now() + (60 * 60 * 24 * 7 * 1000)),
+//     }
+//   })
+// );
 
 app.use(
   '/client',

@@ -10,18 +10,18 @@
     "start": "node app.js"
   },
   "devDependencies": {
-    "lodash" : "*",
-    "express" : "*",
-    "body-parser" : "*",
-    "cookie-parser" : "*",
-    "express-session" : "*",
-    "express-mysql-session" : "*",
-    "sequelize" : "*",
-    "mysql" : "*",
-    "socket.io" : "*",
-    "cookie" : "*",
-    "crypto" : "*",
-    "multer" : "*",
-    "mime" : "*"
+    "lodash" : "4.12.0",
+    "express" : "4.13.4",
+    "body-parser" : "1.15.1",
+    "cookie-parser" : "1.4.1",
+    "express-session" : "1.13.0",
+    "express-mysql-session" : "1.0.0",
+    "sequelize" : "3.23.1",
+    "mysql" : "2.10.2",
+    "socket.io" : "1.4.6",
+    "cookie" : "0.2.3",
+    "crypto" : "0.0.3",
+    "multer" : "1.1.0",
+    "mime" : "1.3.4"
   }
 }
