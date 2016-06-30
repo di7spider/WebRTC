@@ -1,6 +1,14 @@
 {
   "name": "WebRTC",
+  "version": "0.1",
   "description": "WebRTC",
+  "engines": {
+    "node": "5.9.1"
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "devDependencies": {
     "lodash" : "*",
     "express" : "*",
