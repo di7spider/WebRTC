@@ -212,15 +212,27 @@ module.exports = function(server){
 
             setTimeout(function(){
 
-                var send = {};
+                var 
+                    send = {},
+                    isRefresh = _.has(storage.pages[hsid], st.handshake.headers.referer);
 
                 if(_.size(storage.pages[hsid]) <= 0){ /** Если пользователь ушёл с сайта */
                     
                     send = {offline : true};
                 
-                }else if( !_.has(storage.pages[hsid], st.handshake.headers.referer) ){ /** Закрыл страницу */
+                }else if(!isRefresh){ /** Закрыл страницу */
 
                     send = {offline : false};
+
+                    if(st.room){    
+                    
+                        /** Удаляем накопившиеся сообщения комнаты, если все пользователи вышли из нее */            
+                        if( !_.size(io.sockets.adapter.rooms[st.room]) ){
+
+                            storage.messages[st.room] = []; 
+                            storage.users[st.room] = {}; 
+                        }
+                    }
                 }
 
                 if( !_.isEmpty(send) ){
@@ -233,33 +245,26 @@ module.exports = function(server){
                         }, send), 
                         function(){}
                     );
-                }                 
-
-                if(st.room){    
-                    
-                    /** Удаляем накопившиеся сообщения комнаты, если все пользователи вышли из нее */            
-                    if( !_.size(io.sockets.adapter.rooms[st.room]) ){
-
-                        storage.messages[st.room] = []; 
-                        storage.users[st.room] = {}; 
-                    }
-
-                    /** Отправить всем клиентам в комнате, кроме отправителя */
-                    st.broadcast.to(st.room).emit(
-                        'room', {
-                          id : st.id,
-                          hsid : st.hsid,
-                          type : 'state',
-                          data : {
-                            id : st.id,
-                            isStream : false,
-                            isDisconnect : true
-                          }
-                        }
-                    );
-                }
+                }                  
 
             }, 5000);
+
+            if(st.room){    
+
+                /** Отправить всем клиентам в комнате, кроме отправителя */
+                st.broadcast.to(st.room).emit(
+                    'room', {
+                      id : st.id,
+                      hsid : st.hsid,
+                      type : 'state',
+                      data : {
+                        id : st.id,
+                        isStream : false,
+                        isDisconnect : true
+                      }
+                    }
+                );
+            }
         });
     
     });
