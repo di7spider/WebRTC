@@ -4,7 +4,7 @@ var
 	sequelize = new Sequelize(config.db.name, config.db.login, config.db.pass, {
 	  host: config.db.host,
 	  dialect: config.db.dialect,
-	 // port : config.db.port,
+	  port : config.db.port,
 	  pool: {
 	    max: 5,
 	    min: 0,
@@ -68,14 +68,14 @@ var
 		)
 	};
 
-// models.user.sync({force: true}).then(function(){
+models.user.sync({force: true}).then(function(){
 
-//   models.user.create();
-// });
+  models.user.create();
+});
 
-// models.sid.sync({force: true}).then(function(){
+models.sid.sync({force: true}).then(function(){
 
-//   models.sid.create();
-// });
+  models.sid.create();
+});
 
 module.exports = models;
