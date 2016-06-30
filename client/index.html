@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+   <head>
+        <meta charset="utf-8">
+        <title>Главная страница</title>
+        <link rel="stylesheet" type="text/css" href="/client/css/common.css">
+        <link rel="stylesheet" type="text/css" href="/client/css/index.css">
+    </head>
+    <body>
+        <div class="app-wrap-main">             
+            <div class="app-wrap-bk">
+                <div class='app-wrap-content'>   
+                    <div class="app-wrap-top">
+                        <a title="Перейти на главную страницу" class="app-btn-logo" href="/"></a>
+                        <ul data-wrap="btn-auth" class="app-btn-auth">
+                            <li title="Авторизация" data-btn="login" data-toggle="[data-form='auth']">Авторизация</li>           
+                            <li title="Регистрация" data-btn="reg" data-toggle="[data-form='reg']">Регистрация</li>
+                            <li title="Перейти в ЛК" data-btn="personal" class="app-btn-personal">
+                                <a href="/personal/">
+                                    <img src="/client/img/img.avatar.png">
+                                    <span></span>
+                                </a>
+                            </li>
+                            <li title="Выйти" data-btn="logout" class="app-btn-logout">Выйти</li>
+                        </ul>
+                        <form class="app-pupup app-popup-auth" data-form='auth' data-method='userLogin' data-evt="evt.form.login.reg">
+                            <span data-btn="close" class="app-popup-close">&#xe819;</span>
+                            <p class="app-title">Авторизация</p>
+                            <input class="app-field" type="hidden" name="rule" value="userLogin" >
+                            <div class="app-wrap-field">
+                                <input required class="app-field" type="text" name="email" value="gurov.dimon@gmail.com" placeholder="e-mail*">
+                                <span class="app-error"></span>
+                            </div>
+                            <div class="app-wrap-field">
+                                <input required class="app-field" type="password" name="pass" value="123456" placeholder="пароль*">
+                                <span class="app-error"></span>
+                            </div>
+                            <div class="app-wrap-btn-send">
+                                <input data-btn="send" class="app-btn-send" type="button" name="send" value="Авторизоваться">
+                            </div>
+                        </form>
+                        <form class="app-pupup app-popup-reg" data-form='reg' data-method='userReg' data-evt="evt.form.login.reg">
+                            <span data-btn="close" class="app-popup-close">&#xe819;</span>
+                            <p class="app-title">Регистрация</p>
+                            <input class="app-field" type="hidden" name="rule" value="userReg" >
+                            <div class="app-wrap-field">
+                                <input required class="app-field" type="text" name="email" value="gurov.dimon@gmail.com" placeholder="e-mail*">
+                                <span class="app-error"></span>
+                            </div>
+                            <div class="app-wrap-field">
+                                <input class="app-field" type="text" name="name" value="ДС" placeholder="name">
+                                <span class="app-error"></span>
+                            </div>
+                            <div class="app-wrap-field">
+                                <input required class="app-field" type="password" name="pass" value="123456" placeholder="пароль*">
+                                <span class="app-error"></span>
+                            </div>
+                            <div class="app-wrap-btn-send">
+                                <input data-btn="send" class="app-btn-send" type="button" name="send" value="Зарегистрироваться">
+                            </div>
+                        </form>
+                    </div>
+                    <div class='app-wrap-gen-room'>
+                        <p class="app-title-top">Введите ссылку на комнату</p>
+                        <div class="app-wrap-get-room">
+                            <input name="getRoom">
+                            <button data-btn="nextRoom" class="app-btn-next-room">Вперёд</button>
+                        </div>
+                        <p class="app-title-bottom">Нет ссылки? Просто нажми "Вперёд"</p>
+                    </div>
+                </div>
+            </div>       
+            <div class='app-wrap-content'>
+                <div class="app-wrap-employees">
+                    <p class="app-title">Или перейдите в комнату с одним из сотрудников</p>
+                    <div class="app-wrap-users"></div>
+                </div>
+            </div>
+            <div class="app-wrap-info">
+                <div class='app-wrap-content'>
+                    <p class="app-title">Ничего устанавливать не нужно!</p>
+                    <p class="app-description">
+                        Наш сервис работает в окне браузера. Вам не придётся устанавливать дополнительные плагины, расширения и т.д. <br><br>
+                        Всё, что Вам понадобиться, это современный браузер.
+                    </p>
+                    <div class="app-wrap-browsers">
+                        <a title="Google Chrome" href="https://www.google.ru/chrome/browser/desktop/" target="_blank">&#xe804;</a>
+                        <a title="Opera" href="https://www.mozilla.org/ru/firefox/new/" target="_blank">&#xe803;</a>
+                        <a title="Mozilla Firefox" href="http://www.opera.com/ru" target="_blank">&#xe805;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/client/js/lib/jquery.js"></script>
+        <script src="/client/js/lib/underscore.js"></script>
+        <script src="/client/js/lib/socket.io.js"></script>
+        <script src="/client/js/api.js"></script>
+        <script src="/client/js/common.js"></script>
+        <script src="/client/js/login.reg.js"></script>
+        <script src="/client/js/index.js"></script>
+    </body>
+</html>

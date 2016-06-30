@@ -1,0 +1,251 @@
+@font-face {
+  font-family: 'fregat';
+  src: url('fonts/fregat.eot');
+  src: url('fonts/fregat.eot?#iefix') format('embedded-opentype'), url('fonts/fregat.woff') format('woff'), url('fonts/fregat.ttf.gz') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'fregatbold';
+  src: url('fonts/fregat_bold.eot');
+  src: url('fonts/fregat_bold.eot?#iefix') format('embedded-opentype'), url('fonts/fregat_bold.woff') format('woff'), url('fonts/fregat_bold.ttf.gz') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'fregatbold_italic';
+  src: url('fonts/fregat_bold_italic.eot');
+  src: url('fonts/fregat_bold_italic.eot?#iefix') format('embedded-opentype'), url('fonts/fregat_bold_italic.woff') format('woff'), url('fonts/fregat_bold_italic.ttf.gz') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'fregatitalic';
+  src: url('fonts/fregat_italic.eot');
+  src: url('fonts/fregat_italic.eot?#iefix') format('embedded-opentype'), url('fonts/fregat_italic.woff') format('woff'), url('fonts/fregat_italic.ttf.gz') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'fontello';
+  src: url('fonts/icon/fontello.eot');
+  src: url('fonts/icon/fontello.eot?#iefix') format('embedded-opentype'), url('fonts/icon/fontello.woff?') format('woff'), url('fonts/icon/fontello.ttf?') format('truetype'), url('fonts/icon/fontello.svg?#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/** Main */
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #4D494E url(../img/img.pattern.png) 0% 0%/auto padding-box border-box !important;
+  font-family: 'fregat';
+}
+
+body * {
+  font-family: 'fregat';
+}
+
+body ul,
+body ul li {
+  margin: 0px;
+  padding: 0px;
+}
+
+.app-wrap-main {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  text-shadow: rgba(0, 0, 0, .4)0 1px 4px;
+}
+
+.app-wrap-main a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.app-wrap-main .app-wrap-content {
+  width: 848px;
+  margin: 0 auto;
+}
+
+/* Head Auth */
+.app-wrap-main .app-wrap-top {
+  overflow: hidden;
+  position: relative;
+  margin-top: 15px;
+}
+
+.app-wrap-main .app-wrap-top .app-btn-logo {
+  display: block;
+  width: 20px;
+  height: 33px;
+  background: url(../img/img.logo.png) no-repeat;
+  background-size: cover;
+  float: left;
+}
+
+.app-wrap-main .app-wrap-top .app-btn-logo:hover,
+.app-wrap-main .app-wrap-top .app-btn-logo:focus {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.app-wrap-main .app-wrap-top .app-btn-auth {
+  float: right;
+  padding-top: 12px;
+}
+
+.app-wrap-main .app-wrap-top .app-btn-auth li {
+  float: left;
+  list-style-type: none;
+  text-shadow: rgba(0, 0, 0, .4) 0 1px 4px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.app-wrap-main .app-wrap-top .app-btn-auth li:first-child {
+  margin-left: 0px;
+}
+
+.app-wrap-main .app-wrap-top .app-btn-auth li.app-btn-logout {
+  display: none;
+}
+
+.app-wrap-main .app-wrap-top .app-btn-auth li:hover,
+.app-wrap-main .app-wrap-top .app-btn-auth li:focus {
+  text-decoration: underline;
+}
+
+.app-wrap-main .app-btn-personal a {
+  top: -5px;
+  position: relative;
+}
+
+.app-wrap-main .app-btn-personal:hover {
+  text-decoration: none !important;
+}
+
+.app-wrap-main .app-btn-personal:hover span {
+  text-decoration: underline;
+}
+
+.app-wrap-main .app-btn-personal:hover img {
+  opacity: 0.7;
+}
+
+.app-wrap-main .app-btn-personal a > img {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border-radius: 50%;
+  box-shadow: 0px 0px 5px #32a132;
+}
+
+.app-wrap-main .app-btn-personal a > span {
+  position: relative;
+  top: -10px;
+}
+
+.app-wrap-main .app-pupup.app-active-form {
+  top: -1px;
+}
+
+.app-wrap-main .app-pupup {
+  position: fixed;
+  width: 200px;
+  background: #fff;
+  right: 45%;
+  border-radius: 0 0 0 2px;
+  box-shadow: 1px 1px 5px #000;
+  z-index: 1;
+  padding: 20px;
+  border-radius: 2px;
+  top: -500px;
+  transition: 0.500s;
+}
+
+.app-wrap-main .app-pupup .app-title {
+  text-align: center;
+  color: #32a132;
+  font-size: 14px;
+  text-shadow: #FFF 2px 0px 1px;
+  padding: 0;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.app-wrap-main .app-pupup .app-field {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  margin: 10px 0 0 0;
+  width: 100%;
+  box-sizing: border-box;
+  color: #2C3E50;
+  font-size: 13px;
+  outline: none;
+}
+
+.app-wrap-main .app-pupup .app-btn-send {
+  display: block;
+  position: relative;
+  margin: 10px auto 0;
+  padding: 7px 11px;
+  border-radius: 2px;
+  border: none;
+  color: #fff;
+  background-color: #32a132;
+  cursor: pointer;
+}
+
+.app-wrap-main .app-pupup .app-btn-send:hover {
+  background-color: #287828;
+}
+
+.app-wrap-main .app-pupup .app-popup-close {
+  position: absolute;
+  font-family: 'fontello';
+  color: #32a132;
+  right: 7px;
+  top: 7px;
+  cursor: pointer;
+  text-shadow: #FFF 2px 0px 1px;
+}
+
+.app-wrap-main .app-pupup .app-popup-close:hover {
+  color: #287828;
+}
+
+/** Required field */
+.app-description-required {
+  margin-top: 10px;
+}
+
+.app-description-required * {
+  font-size: 14px;
+  color: #c1c1c1;
+}
+
+.app-required {
+  color: #f9093c !important;
+}
+
+/** Error Field */
+.app-error {
+  display: block;
+  position: relative;
+  margin-right: 12px;
+  margin-top: 4px;
+  font-size: 13px;
+  color: #f90058;
+  text-shadow: 0px 0px 1px white;
+}
+
+input.app-active-error {
+  box-shadow: 1px 1px 1px #f90058
+}

@@ -1,0 +1,177 @@
+/** Фон */
+.app-wrap-main .app-wrap-bk {
+  width: 100%;
+  min-width: 850px;
+  height: 450px;
+  background: #ad8bbd;
+  background-size: auto, cover;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.app-wrap-main .app-wrap-top {
+  margin: 0;
+  padding-top: 20px;
+}
+
+/** Перейти в комнату */
+.app-wrap-main .app-wrap-gen-room {
+  margin: 0 auto;
+  margin-top: 127px;
+  width: 400px;
+}
+
+.app-wrap-main .app-wrap-gen-room .app-title-top {
+  font-size: 30px;
+}
+
+.app-wrap-main .app-wrap-gen-room .app-title-bottom {
+  font-size: 15px;
+  text-align: right;
+}
+
+.app-wrap-main .app-wrap-gen-room .app-wrap-get-room {
+  display: flex;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 5px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: aqua;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.app-wrap-main .app-wrap-gen-room .app-wrap-get-room input {
+  border: none;
+  padding: 10px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  outline: none;
+}
+
+.app-wrap-main .app-wrap-gen-room .app-wrap-get-room .app-btn-next-room {
+  border-radius: 2px;
+  cursor: pointer;
+  padding: 8px 18px;
+  position: relative;
+  text-align: center;
+  background-color: #32a132;
+  border: none;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.app-wrap-main .app-wrap-gen-room .app-wrap-get-room .app-btn-next-room:hover,
+.app-wrap-main .app-wrap-gen-room .app-wrap-get-room .app-btn-next-room:focus {
+  background-color: #287828;
+}
+
+/** Браузеры */
+.app-wrap-main .app-wrap-info .app-wrap-browsers {
+  padding: 0 15px;
+  font-size: 30px;
+}
+
+.app-wrap-main .app-wrap-info {
+  height: 210px;
+  width: 100%;
+  padding: 10px 0px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background: url(../img/img.pattern.png) 0% 0% / auto padding-box border-box, grey;
+}
+
+.app-wrap-main .app-wrap-info a {
+  font-family: 'fontello';
+  font-size: 40px;
+  margin: 0 15px;
+  cursor: pointer;
+}
+
+.app-wrap-main .app-wrap-info a:hover {
+  color: #32a132;
+}
+
+.app-wrap-main .app-wrap-info .app-title {
+  margin: 12px 0;
+  font-size: 30px;
+}
+
+.app-wrap-main .app-wrap-info .app-description {
+  margin: 0 auto;
+  padding: 20px 0;
+  max-width: 420px;
+  text-align: left;
+}
+
+/** Сотрудники */
+.app-wrap-main .app-wrap-employees {
+  padding: 10px 0px;
+  text-align: center;
+}
+
+.app-wrap-main .app-wrap-employees .app-title {
+  font-size: 30px;
+}
+
+.app-wrap-main .app-wrap-employees .app-wrap-users {
+  display: table;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.app-wrap-main .app-wrap-employees .app-wrap-users .app-wrap-user {
+  width: 18%;
+  min-width: 200px;
+  float: left;
+  padding: 20px 5px;
+  border: 1px solid transparent;
+}
+
+.app-wrap-main .app-wrap-employees .app-wrap-users .app-wrap-user.app-wrap-user.app-active-status-2:hover{
+  border: 1px solid;
+  cursor: pointer;
+}
+
+.app-wrap-main .app-wrap-employees .app-wrap-users .app-wrap-user.app-active-status-0 {
+  opacity: 0.5;
+}
+
+.app-wrap-main .app-wrap-employees .app-wrap-users .app-wrap-user.app-active-status-0 .app-status {
+  color: #b8b9b7;
+}
+
+.app-wrap-main .app-wrap-employees .app-wrap-users .app-wrap-user.app-active-status-1 .app-status {
+  color: #facf00;
+}
+
+.app-wrap-main .app-wrap-employees .app-wrap-users .app-wrap-user.app-active-status-2 .app-status {
+  color: #88d54f;
+}
+
+.app-wrap-main .app-wrap-employees .app-wrap-users .app-wrap-user .app-status-icon {
+  font-family: "fontello";
+}
+
+.app-wrap-main .app-wrap-employees .app-wrap-users .app-wrap-user .app-wrap-avatar {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px #32a132;
+}
+
+.app-wrap-main .app-wrap-employees .app-wrap-users .app-wrap-user .app-wrap-avatar img {
+  max-width: 100%;
+}
+
+.app-wrap-main .app-wrap-employees .app-wrap-users .app-wrap-user .app-wrap-avatar .app-name {
+  margin-bottom: 0;
+}
+
+.app-wrap-main .app-wrap-employees .app-wrap-users .app-wrap-user .app-wrap-avatar .app-position {
+  margin-top: 2px;
+}

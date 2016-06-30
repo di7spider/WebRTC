@@ -1,0 +1,19 @@
+{
+  "name": "WebRTC",
+  "description": "WebRTC",
+  "devDependencies": {
+    "lodash" : "*",
+    "express" : "*",
+    "body-parser" : "*",
+    "cookie-parser" : "*",
+    "express-session" : "*",
+    "express-mysql-session" : "*",
+    "sequelize" : "*",
+    "mysql" : "*",
+    "socket.io" : "*",
+    "cookie" : "*",
+    "crypto" : "*",
+    "multer" : "*",
+    "mime" : "*"
+  }
+}

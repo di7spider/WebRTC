@@ -1,0 +1,123 @@
+/** Page Edit */
+.app-wrap-main .app-wrap-edit {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background: url(../img/img.pattern.png) 0% 0% / auto padding-box border-box, grey;
+  padding: 50px 100px;
+  border-radius: 3px;
+  margin-top: 10px; 
+}
+
+.app-wrap-main .app-wrap-edit .app-form-edit {
+  overflow: hidden;
+}
+
+.app-wrap-main .app-wrap-edit .app-wrap-field {
+  width: 100%;
+  overflow: hidden;
+}
+
+.app-wrap-main .app-wrap-edit .app-wrap-field p {
+  float: left;
+}
+
+.app-wrap-main .app-wrap-edit .app-wrap-field input,
+.app-wrap-main .app-wrap-edit .app-wrap-field select {
+  width: 250px;
+  float: right;
+  padding: 7px;
+  margin: 12px 0 0 0;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.5);
+}
+
+.app-wrap-main .app-wrap-edit .app-wrap-field select {
+   width: 264px;
+}
+
+.app-wrap-main .app-wrap-edit .app-btn-send {
+  display: block;
+  position: relative;
+  float: right;
+  margin: 10px auto 0;
+  padding: 7px 7px;
+  border-radius: 3px;
+  font-size: 14px;
+  border: none;
+  color: #fff;
+  background-color: #32a132;
+  cursor: pointer;
+  box-shadow: none !important;
+}
+
+.app-wrap-main .app-wrap-edit .app-btn-send:hover,
+.app-wrap-main .app-wrap-edit .app-btn-send:focus {
+  background: #278127;
+}
+
+.app-wrap-main .app-wrap-edit .app-wrap-field input.app-active-error {
+  box-shadow: 3px 1px 10px #ff6c6c;
+}
+
+.app-wrap-main .app-wrap-edit .app-wrap-field .app-error {
+  display: block;
+  position: relative;
+  float: right;
+  margin-right: 12px;
+  margin-top: 19px;
+  font-size: 13px;
+  color: #ff6c6c;
+  text-shadow: rgba(0, 0, 0, .4)0 1px 4px;
+}
+
+.app-wrap-main .app-wrap-edit .app-wrap-field .app-wrap-file-picture {
+  width: 550px;
+  float: left;
+  overflow: hidden;
+  position: relative;
+}
+
+.app-wrap-main .app-wrap-edit .app-wrap-field .app-wrap-file-picture .app-wrap-img {
+  padding-top: 12px;
+}
+
+.app-wrap-main .app-wrap-edit .app-wrap-field .app-wrap-file-picture .app-wrap-img img,
+.app-wrap-main .app-wrap-edit .app-wrap-field .app-wrap-file-picture .app-wrap-img canvas {
+  width: 100px;
+  border-radius: 50%;
+  display: block;
+  float: right;
+}
+
+.app-wrap-main .app-wrap-edit .app-wrap-field .app-wrap-file-picture .app-wrap-img .app-btn-img-remove {
+  display: block;
+  float: right;
+  font-family: 'fontello';
+  color: red;
+  position: absolute;
+  right: 0px;
+  cursor: pointer;
+  text-shadow: none;
+  z-index: 999999999;
+}
+
+.app-wrap-main .app-wrap-edit .app-wrap-field .app-wrap-file-picture .app-wrap-img .app-btn-img-remove:hover {
+  opacity: 0.9;
+}
+
+.app-wrap-main .app-wrap-edit .app-wrap-field .app-wrap-file-picture input[type="file"] {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.app-wrap-main .app-wrap-edit .app-wrap-field .app-wrap-file-picture .app-file-loader {
+  margin-top: 50px;
+  font-size: 14px;
+  margin-left: 33px;
+  display: none;
+}

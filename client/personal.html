@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+   <head>
+        <meta charset="utf-8">
+        <title>Личный кабинет :: Редактирование учётной записи</title>
+        <link rel="stylesheet" type="text/css" href="/client/css/common.css">
+        <link rel="stylesheet" type="text/css" href="/client/css/page.edit.css">
+    </head>
+    <body>
+       <div class="app-wrap-main">     
+            <div class='app-wrap-content'>   
+                <div class="app-wrap-top">
+                    <a title="Перейти на главную страницу" class="app-btn-logo" href="/"></a>
+                    <ul data-wrap="btn-auth" class="app-btn-auth">
+                        <li title="Выйти" data-btn="logout">Выйти</li>
+                    </ul>
+                </div>
+                <div class="app-wrap-edit">
+                    <h2>Редактирование учётной записи</h2>
+                    <form class="app-form-edit" data-form='personal.edit' data-method='userUpdate' data-evt="evt.form.personal.edit">
+                        <input class="app-field" type="hidden" name="rule" value="userUpdate" >
+                        <div class="app-wrap-field">
+                            <div class="app-wrap-file-picture">
+                                <div class="app-wrap-img">
+                                    <img src="/client/img/img.avatar.png">
+                                </div>
+                                <span class='app-file-loader'>Загружено <span>0%</span></span>
+                                <input class="app-field" type="hidden" picture-name name="avatar">
+                                <input accept="image/jpeg,image/png,image/gif" picture type="file"  />
+                            </div>
+                        </div>
+                        <div class="app-wrap-field">
+                            <p>Имя <span class="app-required">*</span></p>
+                            <input required class="app-field" type="text" name="name">
+                            <span class="app-error"></span>
+                        </div>
+                        <div class="app-wrap-field">
+                            <p>Кампания</p>
+                            <input class="app-field" type="text" name="company">
+                            <span class="app-error"></span>
+                        </div>
+                        <div class="app-wrap-field">
+                            <p>Должность</p>
+                            <input class="app-field" type="text" name="position" value="">
+                            <span class="app-error"></span>
+                        </div>
+                        <div class="app-wrap-field">
+                            <p>Email <span class="app-required">*</span></p>
+                            <input required class="app-field" type="text" name="email">
+                            <span class="app-error"></span>
+                        </div>
+                        <div class="app-wrap-field">
+                            <p>Новый пароль</p>
+                            <input field-empty-no-send class="app-field" type="password" name="pass">
+                            <span class="app-error"></span>
+                        </div>
+                        <div class="app-wrap-btn-send">
+                            <input data-btn="send" class="app-btn-send" type="button" name="send" value="Применить">
+                        </div>
+                    </form>
+                    <div class='app-description-required'>
+                        <span class="app-required">*</span>
+                        <span> отмечены поля обязательные для заполнения</span> 
+                    </div>
+                </div>
+            </div>
+       </div>
+        <script src="/client/js/lib/jquery.js"></script>
+        <script src="/client/js/lib/underscore.js"></script>
+        <script src="/client/js/lib/socket.io.js"></script>
+        <script src="/client/js/lib/FileAPI.js"></script>
+        <script src="/client/js/api.js"></script>
+        <script src="/client/js/common.js"></script>
+        <script src="/client/js/personal.js"></script>
+    </body>
+</html>
