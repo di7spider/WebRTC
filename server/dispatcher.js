@@ -61,6 +61,18 @@ app.use(
   })
 );
 
+app.get('*', function(req, res, next){
+    
+    if(req.headers["x-forwarded-proto"] === "https"){
+       
+       return next();
+    
+    }else{
+      
+      res.redirect("https://" + req.headers.host + req.url);
+    }
+});
+
 app.use(
   '/client',
   express.static(dirs.client)
