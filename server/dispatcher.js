@@ -53,8 +53,7 @@ app.use(
         password: config.db.pass,
         database: config.db.name
       },
-      table: 'sessions',
-       expires : new Date(Date.now() + (60 * 60 * 24 * 7 * 1000))
+      table: 'sessions'
     }),
     cookie: {
       expires: new Date(Date.now() + (60 * 60 * 24 * 7 * 1000)),
