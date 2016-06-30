@@ -1,5 +1,5 @@
 var 
-    config = require(dirs.root + '/config'),
+    config = require(__dirname + '/config'),
     express = require('express'),
      _ = require('lodash'),
     app = express(),
