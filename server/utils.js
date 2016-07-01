@@ -95,7 +95,7 @@ var
 						rule : cb.str
 					},
 					company : {
-						name : 'Кампания',
+						name : 'Компания',
 						rule : cb.all
 					},
 					position : {

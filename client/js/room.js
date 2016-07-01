@@ -44,6 +44,7 @@ $(function(){
 
     /** DOM */
     var dom = {
+        parent : $('.app-wrap-main'),
         main : $('[app-media-wrap="main"]'),
         local : $('[app-media-wrap="localSteram"]'),
         remote : $('[app-media-wrap="listRemoteSteram"]'),
@@ -192,39 +193,46 @@ $(function(){
     /** Инициализируем настройки микрофона */
     function microfone(action, params){
 
-        params = params || {};
+        try{
+            
+            params = params || {};
 
-        var microfone = options.microfone;
+            var microfone = options.microfone;
 
-        if(action == 'init'){
+            if(action == 'init'){
 
-            if(options.stream && options.constr.audio){
-                
-                microfone.context = microfone.context || new _audio();
-                
-                var 
-                    microphone = microfone.context.createMediaStreamSource(options.stream),
-                    destination = microfone.context.createMediaStreamDestination(),
-                    output = destination.stream;
+                if(options.stream && options.constr.audio){
+                    
+                    microfone.context = microfone.context || new _audio();
+                    
+                    var 
+                        microphone = microfone.context.createMediaStreamSource(options.stream),
+                        destination = microfone.context.createMediaStreamDestination(),
+                        output = destination.stream;
 
-                microfone.filter = microfone.context.createGain();
+                    microfone.filter = microfone.context.createGain();
 
-                /** Громкость */
-                microfone.filter.gain.value = microfone.value;
+                    /** Громкость */
+                    microfone.filter.gain.value = microfone.value;
 
-                microphone.connect(microfone.filter);
-                microfone.filter.connect(destination);
-        
-                options.stream.addTrack(output.getAudioTracks()[0]);
-                options.stream.removeTrack(options.stream.getAudioTracks()[0]);
+                    microphone.connect(microfone.filter);
+                    microfone.filter.connect(destination);
+            
+                    options.stream.addTrack(output.getAudioTracks()[0]);
+                    options.stream.removeTrack(options.stream.getAudioTracks()[0]);
+                }
+
+            }else if(action == 'volume'){ /** Громкость */
+
+                var volume = parseFloat(params.volume);
+
+                microfone.filter.gain.value = volume;
+                microfone.value = volume;
             }
+        
+        }catch(e){
 
-        }else if(action == 'volume'){ /** Громкость */
-
-            var volume = parseFloat(params.volume);
-
-            microfone.filter.gain.value = volume;
-            microfone.value = volume;
+            alert('Произошла ошибка подключения веб камеры :(');
         }
     }
 
@@ -409,7 +417,8 @@ $(function(){
 
         if( !_.isEmpty(data) ){
 
-            var user = options.users[data.hsid] || {},
+            var 
+                user = options.users[data.hsid] || {},
                 date = new Date(data.date),
                 minutes = date.getMinutes();
 
@@ -422,7 +431,7 @@ $(function(){
 
                 dom.chat.find('.field-mess').append(
                     '<div class="mess-this">'+
-                                                    '<span style="top: 14px;font-size: 13px;" class="mess-date">' + date.getHours() + ':' + minutes + '</span>'+
+                        '<span style="top: 14px;font-size: 13px;" class="mess-date">' + date.getHours() + ':' + minutes + '</span>'+
                         '<div class="mess-cont">'+
                             '<div class="mess">'+  _.escape(data.message) +
                           '</div>'+
@@ -453,17 +462,13 @@ $(function(){
                 );
             }
 
-            chatScroll();
+            
+            var 
+                height = $('.field-mess').height(),
+                scroll = $('.chat-content');
+
+            scroll.scrollTop(height);
         }
-    }
-
-    /** скролим чат */
-    function chatScroll(){
-
-        var height = $('.field-mess').height(),
-            scroll = $('.chat-content');
-
-        scroll.scrollTop(height);
     }
 
     /** Пользователь */
@@ -494,30 +499,6 @@ $(function(){
 
                 delete options.connected[id];
             }
-        }
-    }
-
-    function sendChat(){
-        var 
-            text = dom.chat.find('[app-media-text="message"]'),
-            data = null,
-            message = $.trim(
-                text.val()
-            );
-
-        if(message){
-
-            data = {
-                date : new Date().toString(),
-                message : message
-            };
-
-            text.val(null);
-
-            emit({
-                type : 'message',
-                data : data
-            });
         }
     }
 
@@ -686,17 +667,62 @@ $(function(){
             );
         });
 
-    dom.chat
-        .on('click', '[app-media-btn="send_message"]', function(){ /** Отправить сообщение в чат */
+    dom.parent.find('[data-btn="room-name"] > span').text(
+        window.location.href
+    );
 
-            sendChat();
-            
-        })
+    /** Скопировать ID комнаты */
+    dom.parent.on('click', '[data-btn="room-name"]', function(){
+
+        var 
+            item = $(this),
+            room = $.trim(item.text() ),
+            input = item.find('input');
+
+        if( document.queryCommandSupported('copy') ){
+
+            input.val(room).show().select();
+            document.execCommand("copy");
+            input.hide();
+
+            alert("Идентификатор комнаты скопирован в буфер обмен");
+        
+        }else{
+
+            alert("Ваш браузер не поддерживает копирование в буфер обмена");
+        }
+    });
+
+    /** Отправка сообщения в чат */
+    function sendChat(){
+
+        var 
+            text = dom.chat.find('[app-media-text="message"]'),
+            data = null,
+            message = $.trim(
+                text.val()
+            );
+
+        if(message){
+
+            data = {
+                date : new Date().toString(),
+                message : message
+            };
+
+            text.val(null);
+
+            emit({
+                type : 'message',
+                data : data
+            });
+        }
+    }
+
+    dom.chat
+        .on('click', '[app-media-btn="send_message"]', sendChat)
         .keydown(function(e){
-            if (e.keyCode === 13) {
-                
-                sendChat();
-            }
-          
+            
+            e.keyCode === 13 && sendChat();
         });
 });  

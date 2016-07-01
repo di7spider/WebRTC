@@ -71,6 +71,7 @@ body ul li {
 .app-wrap-main .app-wrap-content {
   width: 848px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 /* Head Auth */

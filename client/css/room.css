@@ -1,106 +1,32 @@
-@font-face {
-  font-family: 'fregat';
-  src: url('fonts/fregat.eot');
-  src: url('fonts/fregat.eot?#iefix') format('embedded-opentype'), url('fonts/fregat.woff') format('woff'), url('fonts/fregat.ttf.gz') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+
+.app-wrap-main .app-wrap-content{
+      width: 1300px;
 }
 
-@font-face {
-  font-family: 'fregatbold';
-  src: url('fonts/fregat_bold.eot');
-  src: url('fonts/fregat_bold.eot?#iefix') format('embedded-opentype'), url('fonts/fregat_bold.woff') format('woff'), url('fonts/fregat_bold.ttf.gz') format('truetype');
-  font-weight: bold;
-  font-style: normal;
+/** Название комнаты */
+.app-wrap-main .app-wrap-top .app-btn-room-name{
+    background: rgba(0, 0, 0, .12);
+    padding: 10px;
+    color: white;
+    border-radius: 3px;
+    float: left;
+    margin-left: 11px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-@font-face {
-  font-family: 'fregatbold_italic';
-  src: url('fonts/fregat_bold_italic.eot');
-  src: url('fonts/fregat_bold_italic.eot?#iefix') format('embedded-opentype'), url('fonts/fregat_bold_italic.woff') format('woff'), url('fonts/fregat_bold_italic.ttf.gz') format('truetype');
-  font-weight: bold;
+.app-wrap-main .app-wrap-top .app-btn-room-name:hover{
+  background: #444444;
 }
 
-@font-face {
-  font-family: 'fregatitalic';
-  src: url('fonts/fregat_italic.eot');
-  src: url('fonts/fregat_italic.eot?#iefix') format('embedded-opentype'), url('fonts/fregat_italic.woff') format('woff'), url('fonts/fregat_italic.ttf.gz') format('truetype');
-  font-weight: normal;
+.app-wrap-main .app-wrap-top .app-btn-room-name input{
+  display: none;
 }
 
-@font-face {
-  font-family: 'fontello';
-  src: url('fonts/icon/fontello.eot');
-  src: url('fonts/icon/fontello.eot?#iefix') format('embedded-opentype'), url('fonts/icon/fontello.woff?') format('woff'), url('fonts/icon/fontello.ttf?') format('truetype'), url('fonts/icon/fontello.svg?#fontello') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
 
-html {
 
-  /*  width: 100%;
-        height: 100%;*/
-}
 
-body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: #4D494E;
-}
 
-.main {
-  width: 100%;
-  height: 100%;
-  color: #fff;
-  font-family: 'Fregat';    /*text-shadow: rgba(0,0,0,.4)0 1px 4px;*/
-}
-
-.main a {
-  text-decoration: none;
-  color: #fff;
-  font-family: 'Fregat';
-}
-
-section.topImg {
-  width: 100%;
-  height: 450px;
-  background: url('./img/patternB2.png') 0% 0%/auto padding-box border-box #ad8bbd;    /*background: url('./img/patternB2.png') 0% 0%/auto padding-box border-box, url("./img/background/2.jpg") no-repeat 50% 50%/cover padding-box border-box;*/
-  background-size: auto, cover;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-header .topBl {
-  position: relative;
-  padding: 15px;
-  height: 34px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.topBl figure.logo {
-  margin: 0;
-  height: 100%;
-}
-
-.topBl figure.logo img {
-  margin: 0;
-  height: 100%;
-}
-
-.topBl .mainNav {
-  position: absolute;
-  top: 11px;
-  right: 15px;
-}
-
-.topBl .mainNav ul li {
-  float: left;
-  padding: 0 5px;
-  list-style-type: none;
-  text-shadow: rgba(0, 0, 0, .4)0 1px 4px;
-}
 
 .linkToRoom {
   padding: 100px 0px;
@@ -300,13 +226,12 @@ section.descriptionService {
   -webkit-transition: all 1s ease-in-out;
 }
 
-.content-room {
+.app-wrap-main {
   width: 100%;
   height: 100%;
-  background: url('./img/patternB2.png') 0% 0%/auto padding-box border-box #4D494E;    /*overflow: hidden;*/
 }
 
-.content-room .video-bl {
+.app-wrap-main .app-wrap-video {
   width: 60%;
   height: 100%;
   float: left;
@@ -314,7 +239,7 @@ section.descriptionService {
   box-sizing: border-box;
 }
 
-.content-room .text-bl {
+.app-wrap-main .text-bl {
   width: 40%;
   height: 90vh;
   float: left;
@@ -322,7 +247,7 @@ section.descriptionService {
   box-sizing: border-box;
 }
 
-.content-room .navigation-bl {
+.app-wrap-main .navigation-bl {
   width: 100%;
   height: 50px;
   padding: 10px;
@@ -331,30 +256,30 @@ section.descriptionService {
       margin-top: -46px;
 }
 
-.content-room .nav-ico {
+.app-wrap-main .nav-ico {
   width: 30%;
   float: left;
 }
 
-.content-room .nav-text {
+.app-wrap-main .nav-text {
   position: relative;
   font-size: 15px;
   font-family: 'Fregat';
 }
 
-.content-room .ico-room {
+.app-wrap-main .ico-room {
   margin: 0;
   font-size: 27px;
 }
 
-.content-room .room-copy-link {
+.app-wrap-main .room-copy-link {
   width: 40%;
   float: left;
   margin: 0 auto;
   text-align: center;
 }
 
-.content-room .room-link {
+.app-wrap-main .room-link {
   margin: 0 auto;
       margin-left: -106px;
   padding: 10px;
@@ -363,21 +288,21 @@ section.descriptionService {
   background-color: rgba(0, 0, 0, .12);
 }
 
-.content-room .room-user {
+.app-wrap-main .room-user {
   width: 10%;
   float: right;
 }
 
-.content-room .video-bl .video-cont {
+.app-wrap-main .app-wrap-video .video-cont {
   width: 650px;
   position: relative;
 }
 
-.content-room .video-bl #your-video {
+.app-wrap-main .app-wrap-video #your-video {
   width: 100%;
 }
 
-.content-room .video-bl #video-companion {
+.app-wrap-main .app-wrap-video #video-companion {
   position: absolute;
   width: 30%;
   bottom: 0;
@@ -420,6 +345,8 @@ section.descriptionService {
   -webkit-transition: -webkit-transform 0.3s;
   transition: transform 0.3s;
   transform: perspective(1000px) rotate3d(1, 0, 0, 90deg);
+    z-index: 99999999999999999 !important;
+    position: relative;
 }
 
 .field-to-send:focus + .label-to-input + .button {
@@ -429,7 +356,7 @@ section.descriptionService {
   right: 8px;
   top: 0;
   cursor: pointer;
-  z-index: 999;
+  z-index: 99999999999999999 !important;
   -webkit-transition: -webkit-transform 0.3s;
   transition: transform 0.3s;
   transform: perspective(1000px) rotate3d(1, 0, 0, 0deg);
@@ -827,9 +754,6 @@ button.app-btn-on span {
   color: #ffda2f;
 }
 
-.app-wrap-main .app-wrap-content{
-      width: 1300px;
-}
 
 .t1{
   margin-left: 88px;
